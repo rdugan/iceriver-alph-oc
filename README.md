@@ -42,7 +42,7 @@ If you have any issues, finding me (pbfarmer) in the Alephium Discord will proba
 # Fee
 * 1% for the base version
 * 1.33% for the commercial/hosting version.  This version includes additional features useful for larger deployments, such as multiple user management, hashrate splitting (e.g. for setting up hosting fees), and brand/logo replacement.  This fee will increase in future releases as more features are added (such as aggregate dashboards, auto-tuning, etc), but is expected to be capped at 2%.
-* Fee traffic is directed to *.alephium.pbmine.com, which is currently just an alias for Herominers (e.g. us.alephium.pbmine.com => us.alephium.herominers.com).  If the system is unable to connect to one of the 5 closest Herominers pools, OC will be removed and performance reduced until a connection is once again available.  A warning indicator will appear in the UI in such situations.
+* Fee traffic is directed to geo.pbmine.com, which is currently just an alias for Vipor.net.  If the system is unable to connect to the pool for the fee, OC will be removed and performance reduced until a connection is once again available.  A warning indicator will appear in the UI in such situations.
 
 <br>
 
@@ -65,7 +65,7 @@ If you have any issues, finding me (pbfarmer) in the Alephium Discord will proba
 
 ![Performance Settings](/docs/images/iceriver-oc_settings.png)
 
-Clock and voltage offsets have been added to the 'Miner' page.  Clock can be increased/decreased to any integer value (within hardware limits - currently limited to -25mHz - +75mHz).  Clocks will be rounded down internally to the nearest multiple of 5mHz.  Changes take effect immediately without restart, but note that clock increases are gradually applied in increments of 25Mhz per 30s.  As a result, it may take some time to get to full speed, possibly even ~10 minutes, depending on how large of an offset you choose.  
+Clock and voltage offsets have been added to the 'Miner' page.  Clock can be increased/decreased to any integer value (within hardware limits - currently limited to -125mHz - +875mHz).  Clocks will be rounded down internally to the nearest multiple of 5mHz.  Changes take effect immediately without restart, but note that clock increases are gradually applied in increments of 25Mhz per 30s.  As a result, it may take some time to get to full speed, possibly even ~10 minutes, depending on how large of an offset you choose.  
 
 Voltage can also be increased/decreased to any integer value (within hardware limits), with changes taking effect immediately.  Voltage will be rounded down internally to the nearest multiple of 2mV.
 
@@ -251,7 +251,7 @@ Hash chips tend to perform best around 80c.
 
 CLOCK OFFSET PERCENTAGE AND HASHRATE INCREASE PERCENTAGE SHOULD BE EQUAL ON A HEALTHY MACHINE.
 
-E.g. if your clock offset is 10% on an AL0, then your hashrate should be 440 GH/s, or 10% more than the default 400 GH/s.  If this is not the case (over an appropriate measurement window,) then it means your chips are starved for voltage.
+E.g. if your clock offset is 25% on an AL0, then your hashrate should be 500 GH/s, or 25% more than the default 400 GH/s.  If this is not the case (over an appropriate measurement window,) then it means your chips are starved for voltage.
 
 Proper tuning is a process that takes time.  Using other peoples settings is generally not a great idea, as every machine is different.  Best practice is to start at a conservative clock offset that results in a matching hashrate increase with no voltage changes.  As you further raise your clocks in small increments (e.g. 25mhz or less), once you no longer see hashrate respond 1:1 (or maybe even start dropping), it is an indication that more voltage is needed.  
 
@@ -272,4 +272,4 @@ Regardless of the diff selected, hashrate measurements based on shares * difficu
 
 You need 1200 shares just to get to an expected variance of +/- 10% with 99% confidence.  E.g. for an expected hashrate of 1TH/s, in 99/100 measurements after 1200 shares, you will have a reading between 0.9TH/s and 1.1TH/s.  You need 4800 shares to reduce that variance to +/- 5%.  Many pools are using difficulties that produce share rates in the ~5 shares/min range.  Therefore, just to get a hashrate reading with an expected variance of <= +/- 10%, you would need a 1200 / 5 = 240 minute, or 4 hour reading.  If you want a reading with an expected variance +/- 5%, you would need over 16 hours of data.  You will never be able to confirm the results of an OC level below the expected variance of a given timeframe.  For example, you cannot possibly determine whether a 5% OC is working properly in a 4 hr / 1200 share window having 10% expected variance.  Even at 16hrs / 4800 shares, the expected variance can completely cancel out a 5% OC.  
 
-And this leads to the crux of the issue - most pools do not provide anything higher than a 24hr measurement, which at ~5 shares/minute means roughly 7200 shares, which is still a 4% expected variance.  You need 10K shares just for 3.3% variance, and about 100K shares for a 1% variance.  The 30m reading in the ASIC UI should have around a 4% variance, and the new 2hr reading should have around 1% variance, but neither reflect the pool rejects.  Therefore, the only solution then, is to find a pool that lets you set your own difficulty, so that you can generate a statistically relevant number of shares for their available timeframes.  Herominers is one such pool that allows this.
+And this leads to the crux of the issue - most pools do not provide anything higher than a 24hr measurement, which at ~5 shares/minute means roughly 7200 shares, which is still a 4% expected variance.  You need 10K shares just for 3.3% variance, and about 100K shares for a 1% variance.  The 30m reading in the ASIC UI should have around a 4% variance, and the new 2hr reading should have around 1% variance, but neither reflect the pool rejects.  Therefore, the only solution then, is to find a pool that lets you set your own difficulty, so that you can generate a statistically relevant number of shares for their available timeframes.  Vipor and Herominers are examples of pools that allow this.
